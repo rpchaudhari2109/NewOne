@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "_Layout";
+}
+
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    @*All the javascript and css files that are required by the 
+    application can be referenced here so that there is no 
+    need to reference them in each and every view*@
+
+</head>
+<body>
+    <div>
+        <table border="1" style="width: 1350px; height: 600px; font-family: Arial">
+            @*<tr>
+                <td colspan="1" style="text-align: center"></td>
+            </tr>*@
+            <tr>
+                <td colspan="2" style="text-align: center; height: 50px; background-color: lightcoral; background-image: url('~/Images/images(3).png')">
+                    <h3>Please Registered Here...</h3>
+                    <div>
+                        <table>
+                            <td>
+                                @Html.ActionLink("Home", "")</td>
+                            <td>&nbsp @Html.ActionLink("About", "About", "Home")</td>
+                            <td>&nbsp @Html.ActionLink("Contact Us", "Contact", "Home")</td>
+
+                            <td>&nbsp @Html.ActionLink("Register", "Create", "Home")</td>
+                            <td>&nbsp @Html.ActionLink("LogIn", "Login", "Home")</td>
+                        </table>
+                    </div>
+
+                </td>
+
+            </tr>
+            <tr>
+                @*<td style="width: 200px; background-color: darkslateblue"></td>*@
+                <td style="width: 600px">
+                    @RenderBody()
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center; height: 20px; background-color: darkslateblue; font-size: x-small">
+                    <h3>© 2017 Scoopen Technologes</h3>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
+

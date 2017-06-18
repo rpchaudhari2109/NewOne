@@ -1,0 +1,68 @@
+﻿@model Authentication_User.Models.All_User
+
+@{
+    ViewBag.Title = "Create";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>All_User</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Pswd)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Pswd)
+            @Html.ValidationMessageFor(model => model.Pswd)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ConfPasd)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ConfPasd)
+            @Html.ValidationMessageFor(model => model.ConfPasd)
+        </div>
+        
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Email)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Email)
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+
+        @*<div class="editor-label">
+            @Html.LabelFor(model => model.Added_Date)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Added_Date)
+            @Html.ValidationMessageFor(model => model.Added_Date)
+        
+            </div>*@
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@

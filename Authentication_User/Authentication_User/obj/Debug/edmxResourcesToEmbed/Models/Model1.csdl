@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ClsPrac2Model" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="ClsPrac2Entities_Context" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="All_User" EntityType="ClsPrac2Model.All_User" />
+    <EntitySet Name="Permissions" EntityType="ClsPrac2Model.Permission" />
+    <EntitySet Name="Rolls" EntityType="ClsPrac2Model.Roll" />
+    <AssociationSet Name="FK__Permission__U_Id__619B8048" Association="ClsPrac2Model.FK__Permission__U_Id__619B8048">
+      <End Role="All_User" EntitySet="All_User" />
+      <End Role="Permission" EntitySet="Permissions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Permission__R_Id__628FA481" Association="ClsPrac2Model.FK__Permission__R_Id__628FA481">
+      <End Role="Roll" EntitySet="Rolls" />
+      <End Role="Permission" EntitySet="Permissions" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="All_User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="Pswd" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="Email" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="Added_Date" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Permissions" Relationship="ClsPrac2Model.FK__Permission__U_Id__619B8048" FromRole="All_User" ToRole="Permission" />
+  </EntityType>
+  <EntityType Name="Permission">
+    <Key>
+      <PropertyRef Name="P_Id" />
+    </Key>
+    <Property Name="P_Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="U_Id" Type="Int32" />
+    <Property Name="R_Id" Type="Int32" />
+    <NavigationProperty Name="All_User" Relationship="ClsPrac2Model.FK__Permission__U_Id__619B8048" FromRole="Permission" ToRole="All_User" />
+    <NavigationProperty Name="Roll" Relationship="ClsPrac2Model.FK__Permission__R_Id__628FA481" FromRole="Permission" ToRole="Roll" />
+  </EntityType>
+  <EntityType Name="Roll">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Permissions" Relationship="ClsPrac2Model.FK__Permission__R_Id__628FA481" FromRole="Roll" ToRole="Permission" />
+  </EntityType>
+  <Association Name="FK__Permission__U_Id__619B8048">
+    <End Role="All_User" Type="ClsPrac2Model.All_User" Multiplicity="0..1" />
+    <End Role="Permission" Type="ClsPrac2Model.Permission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="All_User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Permission">
+        <PropertyRef Name="U_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Permission__R_Id__628FA481">
+    <End Role="Roll" Type="ClsPrac2Model.Roll" Multiplicity="0..1" />
+    <End Role="Permission" Type="ClsPrac2Model.Permission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roll">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Permission">
+        <PropertyRef Name="R_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

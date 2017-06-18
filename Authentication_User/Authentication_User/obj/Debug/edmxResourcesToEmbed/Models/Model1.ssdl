@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ClsPrac2Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ClsPrac2ModelStoreContainer">
+    <EntitySet Name="All_User" EntityType="ClsPrac2Model.Store.All_User" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Permission" EntityType="ClsPrac2Model.Store.Permission" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Roll" EntityType="ClsPrac2Model.Store.Roll" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK__Permission__R_Id__628FA481" Association="ClsPrac2Model.Store.FK__Permission__R_Id__628FA481">
+      <End Role="Roll" EntitySet="Roll" />
+      <End Role="Permission" EntitySet="Permission" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Permission__U_Id__619B8048" Association="ClsPrac2Model.Store.FK__Permission__U_Id__619B8048">
+      <End Role="All_User" EntitySet="All_User" />
+      <End Role="Permission" EntitySet="Permission" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="All_User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="varchar" MaxLength="20" />
+    <Property Name="Pswd" Type="varchar" MaxLength="20" />
+    <Property Name="Email" Type="varchar" MaxLength="20" />
+    <Property Name="Added_Date" Type="date" />
+  </EntityType>
+  <EntityType Name="Permission">
+    <Key>
+      <PropertyRef Name="P_Id" />
+    </Key>
+    <Property Name="P_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="U_Id" Type="int" />
+    <Property Name="R_Id" Type="int" />
+  </EntityType>
+  <EntityType Name="Roll">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <Association Name="FK__Permission__R_Id__628FA481">
+    <End Role="Roll" Type="ClsPrac2Model.Store.Roll" Multiplicity="0..1" />
+    <End Role="Permission" Type="ClsPrac2Model.Store.Permission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roll">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Permission">
+        <PropertyRef Name="R_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Permission__U_Id__619B8048">
+    <End Role="All_User" Type="ClsPrac2Model.Store.All_User" Multiplicity="0..1" />
+    <End Role="Permission" Type="ClsPrac2Model.Store.Permission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="All_User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Permission">
+        <PropertyRef Name="U_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ClsPrac2Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="ClsPrac2ModelStoreContainer">
+          <EntitySet Name="All_User" EntityType="ClsPrac2Model.Store.All_User" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Permission" EntityType="ClsPrac2Model.Store.Permission" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Roll" EntityType="ClsPrac2Model.Store.Roll" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK__Permission__R_Id__628FA481" Association="ClsPrac2Model.Store.FK__Permission__R_Id__628FA481">
+            <End Role="Roll" EntitySet="Roll" />
+            <End Role="Permission" EntitySet="Permission" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Permission__U_Id__619B8048" Association="ClsPrac2Model.Store.FK__Permission__U_Id__619B8048">
+            <End Role="All_User" EntitySet="All_User" />
+            <End Role="Permission" EntitySet="Permission" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="All_User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" MaxLength="20" />
+          <Property Name="Pswd" Type="varchar" MaxLength="20" />
+          <Property Name="Email" Type="varchar" MaxLength="20" />
+          <Property Name="Added_Date" Type="date" />
+        </EntityType>
+        <EntityType Name="Permission">
+          <Key>
+            <PropertyRef Name="P_Id" />
+          </Key>
+          <Property Name="P_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="U_Id" Type="int" />
+          <Property Name="R_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="Roll">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <Association Name="FK__Permission__R_Id__628FA481">
+          <End Role="Roll" Type="ClsPrac2Model.Store.Roll" Multiplicity="0..1" />
+          <End Role="Permission" Type="ClsPrac2Model.Store.Permission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roll">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Permission">
+              <PropertyRef Name="R_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Permission__U_Id__619B8048">
+          <End Role="All_User" Type="ClsPrac2Model.Store.All_User" Multiplicity="0..1" />
+          <End Role="Permission" Type="ClsPrac2Model.Store.Permission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="All_User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Permission">
+              <PropertyRef Name="U_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ClsPrac2Model" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ClsPrac2Entities_Context" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="All_User" EntityType="ClsPrac2Model.All_User" />
+          <EntitySet Name="Permissions" EntityType="ClsPrac2Model.Permission" />
+          <EntitySet Name="Rolls" EntityType="ClsPrac2Model.Roll" />
+          <AssociationSet Name="FK__Permission__U_Id__619B8048" Association="ClsPrac2Model.FK__Permission__U_Id__619B8048">
+            <End Role="All_User" EntitySet="All_User" />
+            <End Role="Permission" EntitySet="Permissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Permission__R_Id__628FA481" Association="ClsPrac2Model.FK__Permission__R_Id__628FA481">
+            <End Role="Roll" EntitySet="Rolls" />
+            <End Role="Permission" EntitySet="Permissions" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="All_User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Pswd" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Email" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Added_Date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Permissions" Relationship="ClsPrac2Model.FK__Permission__U_Id__619B8048" FromRole="All_User" ToRole="Permission" />
+        </EntityType>
+        <EntityType Name="Permission">
+          <Key>
+            <PropertyRef Name="P_Id" />
+          </Key>
+          <Property Name="P_Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="U_Id" Type="Int32" />
+          <Property Name="R_Id" Type="Int32" />
+          <NavigationProperty Name="All_User" Relationship="ClsPrac2Model.FK__Permission__U_Id__619B8048" FromRole="Permission" ToRole="All_User" />
+          <NavigationProperty Name="Roll" Relationship="ClsPrac2Model.FK__Permission__R_Id__628FA481" FromRole="Permission" ToRole="Roll" />
+        </EntityType>
+        <EntityType Name="Roll">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Permissions" Relationship="ClsPrac2Model.FK__Permission__R_Id__628FA481" FromRole="Roll" ToRole="Permission" />
+        </EntityType>
+        <Association Name="FK__Permission__U_Id__619B8048">
+          <End Role="All_User" Type="ClsPrac2Model.All_User" Multiplicity="0..1" />
+          <End Role="Permission" Type="ClsPrac2Model.Permission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="All_User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Permission">
+              <PropertyRef Name="U_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Permission__R_Id__628FA481">
+          <End Role="Roll" Type="ClsPrac2Model.Roll" Multiplicity="0..1" />
+          <End Role="Permission" Type="ClsPrac2Model.Permission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roll">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Permission">
+              <PropertyRef Name="R_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ClsPrac2ModelStoreContainer" CdmEntityContainer="ClsPrac2Entities_Context">
+          <EntitySetMapping Name="All_User">
+            <EntityTypeMapping TypeName="ClsPrac2Model.All_User">
+              <MappingFragment StoreEntitySet="All_User">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Pswd" ColumnName="Pswd" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Added_Date" ColumnName="Added_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Permissions">
+            <EntityTypeMapping TypeName="ClsPrac2Model.Permission">
+              <MappingFragment StoreEntitySet="Permission">
+                <ScalarProperty Name="P_Id" ColumnName="P_Id" />
+                <ScalarProperty Name="U_Id" ColumnName="U_Id" />
+                <ScalarProperty Name="R_Id" ColumnName="R_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rolls">
+            <EntityTypeMapping TypeName="ClsPrac2Model.Roll">
+              <MappingFragment StoreEntitySet="Roll">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
